@@ -6,9 +6,9 @@ model PlanarTo3D "This model enables to connect planar models to the 3-dimension
 
   outer PlanarWorld planarWorld "planar world model";
   Frame_b framePlanar "Frame connector in PlanarMechanics"
-    annotation (Placement(transformation(extent={{24,-16},{56,16}})));
+    annotation (Placement(transformation(extent={{44,-16},{76,16}}), iconTransformation(extent={{44,-16},{76,16}})));
   MB.Interfaces.Frame_a frameMultiBody "Frame connector in MultiBody"
-    annotation (Placement(transformation(extent={{-56,-16},{-24,16}})));
+    annotation (Placement(transformation(extent={{-76,-16},{-44,16}}), iconTransformation(extent={{-76,-16},{-44,16}})));
 
 protected
   constant SI.Force fz = 0 "Force normal to 2D plane";
@@ -60,51 +60,47 @@ equation
   annotation (
     defaultComponentName="adaptor3D",
     Icon(
-      coordinateSystem(extent={{-40,-20},{40,20}},
-          preserveAspectRatio=false),
+      coordinateSystem(extent={{-60,-60},{60,60}}, initialScale=0.1),
       graphics={
         Rectangle(
-          extent={{-26,20},{26,-20}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(
-          points={{-38,26},{-26,26},{-26,-26},{-38,-26}},
-          color={95,95,95},
-          thickness=0.5),
-        Line(
-          points={{38,26},{26,26},{26,-26},{38,-26}},
-          color={95,95,95},
-          thickness=0.5),
+          extent={{-56,22},{2,-22}},
+          lineColor={0,0,0},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.HorizontalCylinder),
         Text(
           extent={{-90,60},{90,30}},
           lineColor={0,0,255},
           textString="%name"),
-        Rectangle(
-          extent={{-26,8},{26,-8}},
-          lineColor={95,95,95},
-          fillColor={95,95,95},
+        Polygon(
+          points={{-4,24},{6,24},{6,18},{-10,18},{-4,24}},
+          lineColor={255,255,255},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-58,-26},{-22,-62}},
-          lineColor={128,128,128},
+        Polygon(
+          points={{-8,-18},{4,-18},{4,-24},{-14,-24},{-8,-18}},
+          lineColor={255,255,255},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="3D"),
-        Text(
-          extent={{22,-26},{58,-62}},
-          lineColor={128,128,128},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="2D")}),    Documentation(revisions="<html><p><img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\"/> <b>Developed 2010-2014 at the DLR Institute of System Dynamics and Control</b></p></html>",  info="<html>
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{20,-18},{20,18},{-10,18},{-18,10},{0,-10},{-8,-18},{20,-18}},
+          lineColor={255,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,0,0}),
+        Polygon(
+          points={{56,-22},{4,-22},{16,-10},{-2,10},{10,22},{56,22},{56,-22}},
+          lineColor={0,0,0},
+          fillColor={225,240,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-6,22},{-18,10},{0,-10},{-12,-22}}, color={0,0,0})}),
+                                 Documentation(revisions="<html><p><img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\"/> <b>Developed 2010-2014 at the DLR Institute of System Dynamics and Control</b></p></html>",  info="<html>
 <p>This component enables the connection between planar and <a href=\"Modelica://Modelica.Mechanics.MultiBody\">3-dimensional</a> mechanics.</p>
 <p>The orientation and position of the 2D system within the 3D system are determined by the Multi-Body connector of the planar world model or zero rotation at zero position otherwise</p>
 <p>The physical connection assumes the 2D world to be the root of the system, defining the orientation. All forces and torques acting outside the plane are assumed to be absorbed by the planar world system.. Beware! These forces are not transmitted by the Multi-Body connector of the planar world.</p>
 <p>See also <a href=\"modelica://PlanarMechanics.UsersGuide.Tutorial.Connecting3D\">Tutorial</a> for more information.</p>
 </html>"),
-    Diagram(coordinateSystem(extent={{-40,-20},{40,20}}, preserveAspectRatio=false),
+    Diagram(coordinateSystem(extent={{-60,-60},{60,60}}, initialScale=0.1),
         graphics={Line(
-          points={{-40,0},{40,0}},
+          points={{-60,0},{60,0}},
           color={95,95,95},
           thickness=0.5)}));
 end PlanarTo3D;
