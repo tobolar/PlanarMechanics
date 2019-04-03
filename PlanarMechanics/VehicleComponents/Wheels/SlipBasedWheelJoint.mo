@@ -168,23 +168,26 @@ equation
         Line(
           points={{-40,-100},{40,-100}},
           color={95,95,95}),
-        Line(
-          points={{-40,-60},{40,-60}},
-          color={95,95,95}),
         Rectangle(
           extent={{100,10},{40,-10}},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={231,231,231}),
-        Text(
-          extent={{-150,140},{150,100}},
-          textString="%name",
-          lineColor={0,0,255}),
         Line(
           visible=useHeatPort,
           points={{-100,-100},{-100,-90},{-30,-90}},
           color={191,0,0},
           pattern=LinePattern.Dot,
-          smooth=Smooth.None)}),   Documentation(info="<html>
+          smooth=Smooth.None),
+        Text(
+          extent={{-150,-40},{150,-70}},
+          lineColor={0,0,0},
+          textString="radius=%radius"),
+        Text(
+          extent={{-150,140},{150,100}},
+          textString="%name",
+          lineColor={0,0,255})}),
+    Documentation(
+      info="<html>
 <p>The ideal wheel joint models the behavior of a wheel rolling on a x,y-plane whose contact patch has slip-dependent friction characteristics. This is an approximation for wheels with a rim and a rupper tire.</p>
 <p>The force depends with friction characteristics on the <b>slip</b>. The <b>slip</b> is split into two components:</p>
 <ul>
@@ -196,7 +199,11 @@ equation
 <p>The wheel contains a 2D connector <b>frame_a</b> for the steering on the plane. The rolling motion of the wheel can be actuated by the 1D  connector <b>flange_a</b>.</p>
 <p>In addition there is an input for a dynamic component of the normal load.</p>
 <p>For examples of usage see the local <a href=\"modelica://PlanarMechanics.VehicleComponents.Examples\">Examples package</a>.</p>
-</html>", revisions="<html>
-<p><img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\"/> <b>Developed 2010-2018 at the DLR Institute of System Dynamics and Control</b></p>
+</html>", 
+      revisions="<html>
+<p>
+<img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
+<b>Developed 2010-2019 at the DLR Institute of System Dynamics and Control</b>
+</p>
 </html>"));
 end SlipBasedWheelJoint;

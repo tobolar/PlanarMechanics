@@ -5,22 +5,25 @@ class ReleaseNotes "Release notes"
   annotation (
     Documentation(
       info="<html>
-<h4>(Preliminary) Version 1.5.0, 2018-10-30</h4>
+<h4>Version 1.4.1, 2019-03-29</h4>
 <p>
-This version requires the <b>Modelica 3.2.3</b> Library.
-This version is backwards compatible to versions&nbsp;1.4.x of the PlanarMechanics library.
+This version requires the <b>Modelica&nbsp;3.2.3</b> Library.
+It is backwards compatible to previous library versions.
 </p>
+<p>Improvements in this version:</p>
+<ul>
+<li>PNG files moved to folders which exactly represent the package structure
+    (see also <a href=\"modelica://Modelica.UsersGuide.Conventions.Documentation.Format.Figures\">Modelica.UsersGuide.Conventions.Documentation.Format.Figures</a>).</li>
+<li>Documentation of some classes.</li>
+<li>Improved icons of some classes.</li>
+</ul>
 
+<!--
 <p>New features</p>
 <ul>
 <li>...</li>
 </ul>
-
-<p>Improvements in this version</p>
-<ul>
-<li>...</li>
-</ul>
-
+-->
 
 <h4>Version 1.4.0, 2017-01-12</h4>
 <p>
