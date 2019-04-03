@@ -86,7 +86,14 @@ equation
       color={95,95,95},
       thickness=0.5));
   annotation (experiment(StopTime=10),
-    Documentation(revisions="<html><p><img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\"/> <b>Developed 2010-2014 at the DLR Institute of System Dynamics and Control</b></p></html>",  info="<html>
+    Documentation(
+      revisions="<html>
+<p>
+<img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
+<b>Developed 2018 at the DLR Institute of System Dynamics and Control</b>
+</p>
+</html>",
+      info="<html>
 <p>
 This example of the planar damped crane crab is modelled purely in 3D and
 is aimed as a reference model for comparison to the crane crab model in the planar world.

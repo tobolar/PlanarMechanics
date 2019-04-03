@@ -95,7 +95,14 @@ equation
       color={95,95,95},
       thickness=0.5));
   annotation (experiment(StopTime=10),
-    Documentation(revisions="<html><p><img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\"/> <b>Developed 2010-2014 at the DLR Institute of System Dynamics and Control</b></p></html>",  info="<html>
+    Documentation(
+      revisions="<html>
+<p>
+<img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
+<b>Developed 2018 at the DLR Institute of System Dynamics and Control</b>
+</p>
+</html>",
+      info="<html>
 <p>
 This example demonstrates a possible connection of planar and 3-dimensional (3D) world.
 Here, the planar damped crane crab is modelled of both planar and multibody parts as follows
