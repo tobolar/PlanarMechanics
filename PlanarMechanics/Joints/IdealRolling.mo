@@ -18,45 +18,18 @@ model IdealRolling "A joint representing a wheel ideally rolling on the x-axis"
   SI.AngularAcceleration z(start = 0) "Angular acceleration" annotation(Dialog(group="Initialization", showStartAttribute=true));
   SI.Velocity vx(start = 0) "Velocity in x-direction" annotation(Dialog(group="Initialization", showStartAttribute=true));
   //Visualization
-  MB.Visualizers.Advanced.Shape cylinder(
-    shapeType="cylinder",
+protected
+  constant Modelica.Mechanics.MultiBody.Frames.Orientation Rrel =
+    Modelica.Mechanics.MultiBody.Frames.planarRotation({1,0,0}, Modelica.Constants.pi/2, 0) "Orientation object in 3d";
+
+  Visualizers.Advanced.Wheel wheel(
+    R=MB.Frames.absoluteRotation(planarWorld.R, Rrel),
+    r=planarWorld.r_0 + MB.Frames.resolve1(planarWorld.R, {frame_a.x,frame_a.y,0.1}),
+    psi=phi,
+    radius=R,
+    width=0.06,
     color={255,0,0},
-    specularCoefficient=0.5,
-    length=0.06,
-    width=2*R,
-    height=2*R,
-    lengthDirection={0,0,1},
-    widthDirection={1,0,0},
-    r_shape={0,0,-0.03},
-    r=MB.Frames.resolve1(planarWorld.R,{frame_a.x,frame_a.y,0})+planarWorld.r_0,
-    R=planarWorld.R) if planarWorld.enableAnimation and animate;
-  MB.Visualizers.Advanced.Shape rim1(
-    shapeType="cylinder",
-    color={195,195,195},
-    specularCoefficient=0.5,
-    length=R*2,
-    width=0.1,
-    height=0.1,
-    lengthDirection={1,0,0},
-    widthDirection={0,0,1},
-    r_shape={-R,0,0},
-    r=MB.Frames.resolve1(planarWorld.R,{frame_a.x,frame_a.y,0})+planarWorld.r_0,
-    R=MB.Frames.absoluteRotation(planarWorld.R,MB.Frames.planarRotation({0,0,1},phi,0)))
-    if planarWorld.enableAnimation and animate;
-  MB.Visualizers.Advanced.Shape rim2(
-    shapeType="cylinder",
-    color={195,195,195},
-    specularCoefficient=0.5,
-    length=R*2,
-    width=0.1,
-    height=0.1,
-    lengthDirection={1,0,0},
-    widthDirection={0,0,1},
-    r_shape={-R,0,0},
-    r=MB.Frames.resolve1(planarWorld.R,{frame_a.x,frame_a.y,0})+planarWorld.r_0,
-    R=MB.Frames.absoluteRotation(planarWorld.R,MB.Frames.planarRotation({0,0,1},phi-Modelica.Constants.pi/2,0)))
-    if planarWorld.enableAnimation and animate;
-initial equation
+    specularCoefficient=0.5) if planarWorld.enableAnimation and animate;
 
 equation
   //Differential Equations

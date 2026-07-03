@@ -9,7 +9,8 @@ package PlanarMechanics "Library to model 2-dimensional, planar mechanical syste
     preferredView="info",
     version="1.7.0",
     versionDate="2026-07-03",
-    dateModified = "2026-06-15 12:00:00Z",
+    versionBuild=2,
+    dateModified = "2026-07-03 16:30:00Z",
     uses(
       Modelica(version="4.1.0")),
     conversion(
