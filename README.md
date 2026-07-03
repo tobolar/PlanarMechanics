@@ -22,13 +22,13 @@ The PlanarMechanics library is an open-source Modelica library for the modelling
 
 ## Current release
 
-[PlanarMechanics Library 1.6.0 (2023-09-12)](../../releases/tag/v1.6.0)
+[PlanarMechanics Library 1.7.0 (2026-07-03)](../../releases/tag/v1.7.0)
 
 It is planed to release the version 1.7.0 by 2026-07-03. Pre-releases are available [here](https://github.com/dzimmer/PlanarMechanics/releases).
 
 ## License
 
-The library is released under the 3-Clause BSD license, see [LICENSE](LICENSE).
+The library is released under the 3-Clause BSD license, see [LICENSE](LICENSE) and https://modelica.org/licenses/modelica-3-clause-bsd.
 
 ## Reference results
 Reference results for regression testing can be found in [PlanarMechanics_ReferenceResults](https://github.com/DLR-SR/PlanarMechanics_ReferenceResults).
@@ -38,7 +38,7 @@ The [current release](#current-release) was developed/tested using following too
 
 - [Dymola](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
 - [Open Modelica](https://www.openmodelica.org/): The library is fully compatible to Open Modelica.  
-- [Modelon Impact](https://www.modelon.com/modelon-impact/): The library is reported to be fully compatible to Modelon Impact.
+<!-- - [Modelon Impact](https://www.modelon.com/modelon-impact/): The library is reported to be fully compatible to Modelon Impact. -->
 
 Your tool not listed here? Please prepare a corresponding pull request of this README.md containing your tool's name and version number.
 
@@ -46,7 +46,7 @@ Your tool not listed here? Please prepare a corresponding pull request of this R
 The library was developed by the German Aerospace Center (DLR)
 Contributors:
 - Dr. Dirk Zimmer
-- Franciscus van der Linden
+- Dr. Franciscus van der Linden
 - Zheng Qu
 - Dr. Jakub Tobolar
 
