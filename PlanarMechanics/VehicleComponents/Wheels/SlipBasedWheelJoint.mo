@@ -85,7 +85,7 @@ protected
     color=color,
     specularCoefficient=specularCoefficient) if planarWorld.enableAnimation and animate;
 equation
-  Rrel = Modelica.Mechanics.MultiBody.Frames.planarRotation({0,0,1}, frame_a.phi, 0);
+  Rrel = Modelica.Mechanics.MultiBody.Frames.planarRotation({0,0,1}, frame_a.phi + Modelica.Math.atan2(e[2], e[1]), 0);
   R = {{cos(frame_a.phi), -sin(frame_a.phi)}, {sin(frame_a.phi),cos(frame_a.phi)}};
   e0 = R*e;
   v = der({frame_a.x,frame_a.y});
