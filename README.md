@@ -22,7 +22,7 @@ The PlanarMechanics library is an open-source Modelica library for the modelling
 
 ## Current release
 
-[PlanarMechanics Library 1.7.0 (2026-07-03)](../../releases/tag/v1.7.0)
+[PlanarMechanics Library 1.7.0 (2026-07-03)](../../releases/tag/v1.7.0-build2)
 
 ## License
 
