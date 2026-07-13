@@ -25,6 +25,7 @@ LICENSE text
 CITATION.cff export-ignore
 README.md export-ignore
 PlanarMechanics/Resources/ReferenceVariables export-ignore
+PlanarMechanics/Resources/Documentation/DLR_IndividualContributorAgreement_PTL.pdf export-ignore
 PlanarMechanicsTest export-ignore
 
 *.mo linguist-language=Modelica
