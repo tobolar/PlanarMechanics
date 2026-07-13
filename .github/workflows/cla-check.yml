@@ -1,0 +1,18 @@
+# .github/workflows/cla-check.yml
+# This workflow checks DLR's Individual Contributor License Agreement.
+
+name: "Check DLR's individual CLA"
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  check-cla:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for CLA label
+        run: |
+          if ! gh pr view --json labels | grep -q '"name":"CLA-signed"'; then
+            echo "U+274C CLA not signed yet. Please sign the CLA and add the 'CLA-signed' label."
+            exit 1
+          fi
