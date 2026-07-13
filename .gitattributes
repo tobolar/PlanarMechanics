@@ -24,6 +24,7 @@ LICENSE text
 .gitignore export-ignore
 CITATION.cff export-ignore
 README.md export-ignore
+docs/DLR_IndividualContributorAgreement_PTL.pdf export-ignore
 PlanarMechanics/Resources/ReferenceVariables export-ignore
 PlanarMechanicsTest export-ignore
 
