@@ -10,7 +10,7 @@
 name: "Check DLR's individual CLA"
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, synchronize]
 
 permissions:
   pull-requests: read
