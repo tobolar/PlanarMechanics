@@ -28,10 +28,10 @@ jobs:
             echo "skip_cla=false" >> $GITHUB_ENV
           fi
 
-      # - name: Skip CLA check if user is from ORG_NAME
-      #   if: ${{ env.skip_cla == 'true' }}
-      #   run: |
-      #     echo "CLA check skipped for internal contributor."
+      - name: Skip CLA check if user is from ORG_NAME
+        if: ${{ env.skip_cla == 'true' }}
+        run: |
+          echo "CLA check skipped for internal contributor."
 
       - name: Check for CLA label (only for external contributors)
         if: ${{ env.skip_cla == 'false' }}
