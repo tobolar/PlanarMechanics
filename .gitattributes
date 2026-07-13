@@ -23,6 +23,7 @@ LICENSE text
 .github export-ignore
 .gitignore export-ignore
 CITATION.cff export-ignore
+CONTRIBUTING.md export-ignore
 README.md export-ignore
 docs/DLR_IndividualContributorAgreement_PTL.pdf export-ignore
 PlanarMechanics/Resources/ReferenceVariables export-ignore
