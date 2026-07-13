@@ -1,0 +1,46 @@
+# .github/workflows/cla-check.yml
+# This workflow checks whether a user signed DLR's Individual Contributor License Agreement (CLA).
+#
+# There exists a list of contributors which already signed DLR's CLA called CLA_SIGNED.
+# It is saved in GitHub/repo -> Settings -> Secrets and variables -> Actions -> Repository secrets.
+# The list has format like: "alice","bob","dev-team","janedoe"
+#
+# The check compares the contributor's name from checked PR to the contributors listed in CLA_SIGNED.
+
+name: "Check DLR's individual CLA"
+on:
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  check-cla:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user signed CLA
+        id: check_cla_signed
+        run: |
+          # User of PR
+          USER_LOGIN="${{ github.event.pull_request.user.login }}"
+          CLA_SIGNED_LIST="${{ secrets.CLA_SIGNED }}"
+
+          # Convert list to an array
+          IFS=',' read -ra CONTRIBUTORS <<< "$CLA_SIGNED_LIST"
+
+          SKIP_CLA=false
+          for USER in "${CONTRIBUTORS[@]}"; do
+            if [[ "$USER" == "$USER_LOGIN" ]]; then
+              SKIP_CLA=true
+              break
+            fi
+          done
+
+          if [ "$SKIP_CLA" = true ]; then
+            echo "User $USER_LOGIN signed DLR's individual CLA."
+          else
+            echo "User $USER_LOGIN did not signed DLR's individual CLA yet."
+            echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
+            exit 1
+          fi
