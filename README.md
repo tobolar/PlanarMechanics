@@ -50,4 +50,4 @@ Contributors:
 
 You may report any issues with using the [Issues](../../issues) button.
 
-Contributions in shape of [Pull Requests](../../pulls) are always welcome.
+Contributions in shape of [Pull Requests](../../pulls) are always welcome. Please refer to [CONTRIBUTING](CONTRIBUTING.md) for more details.
