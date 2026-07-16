@@ -10,7 +10,7 @@
 name: "Check DLR's individual CLA"
 on:
   pull_request:
-    types: [opened, edited]  # , synchronize]
+    types: [opened, edited , synchronize]
 
 # permissions:
 #   contents: read
@@ -52,6 +52,7 @@ jobs:
             echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
             echo "List of contributors who signed CLA:"
             echo "${CONTRIBUTORS[*]}"
+            echo "$CLA_SIGNED_LIST"
           exit 1
           fi
 
