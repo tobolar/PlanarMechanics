@@ -50,9 +50,8 @@ jobs:
             echo "add_label=true" >> $GITHUB_OUTPUT
             echo "User $USER_LOGIN did not sign DLR's individual CLA yet."
             echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
-            echo "List of contributors who signed CLA:"
-            echo "${CONTRIBUTORS[*]}"
-            echo "$CLA_SIGNED_LIST"
+            echo ""
+            echo "List of contributors who signed CLA: ${CONTRIBUTORS[*]}"
           exit 1
           fi
 
