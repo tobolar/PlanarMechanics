@@ -121,16 +121,16 @@ jobs:
 
               const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
 
-                Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
+              Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
 
-                **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
+              **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
 
-                Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
+              Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
 
-                Thank you for your understanding and cooperation.
+              Thank you for your understanding and cooperation.
 
-                Best regards,
-                The ${repoName} team`;
+              Best regards,
+              The ${repoName} team`;
 
               // Check if comment already exists
               const { data: comments } = await github.rest.issues.listComments({
