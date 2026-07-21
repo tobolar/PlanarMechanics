@@ -112,7 +112,7 @@ jobs:
             const repoName = context.repo.repo;
             const owner = context.repo.owner;
 
-            const commentBody = `@${userLogin} Thank you for your first contribution to this repository! Contributor License Agreement (CLA)`;
+            const commentBody = `@${userLogin} Thank you for your first contribution to this repository!  Contributor License Agreement (CLA)`;
 
             // Check if comment already exists
             const { data: comments } = await github.rest.issues.listComments({
