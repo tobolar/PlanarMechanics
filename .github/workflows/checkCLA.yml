@@ -50,7 +50,7 @@ jobs:
             echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
             echo ""
             echo "List of contributors who signed CLA: ${CONTRIBUTORS[*]}"
-          exit 1
+            exit 1
           fi
 
       - name: Add CLA label to PR or remove existing
