@@ -112,7 +112,8 @@ jobs:
             const repoName = context.repo.repo;
             const owner = context.repo.owner;
 
-            const commentBody = `@${userLogin} Thank you for your first contribution to this repository!`;
+            const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
+Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.`;
 
             // Check if comment already exists
             const { data: comments } = await github.rest.issues.listComments({
