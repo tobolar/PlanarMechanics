@@ -25,7 +25,6 @@ jobs:
     steps:
       - name: Check if user signed CLA
         id: check_cla_signed
-        continue-on-error: true  # Do the following steps of this job anyway
         run: |
           # User/contributor of PR
           USER_LOGIN="${{ github.event.pull_request.user.login }}"
@@ -48,7 +47,7 @@ jobs:
             echo "User $USER_LOGIN already in the list of signees of DLR's individual CLA."
           else
             echo "add_label=true" >> $GITHUB_OUTPUT
-            echo "User $USER_LOGIN did not sign DLR's individual CLA yet."
+            echo "Error: User $USER_LOGIN did not sign DLR's individual CLA yet."
             echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
             echo ""
             echo "List of contributors who signed CLA: ${CONTRIBUTORS[*]}"
