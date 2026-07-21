@@ -115,8 +115,8 @@ jobs:
 
             // Check if comment already exists
             const { data: comments } = await github.rest.issues.listComments({
-              owner: owner,
-              repo: repoName,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               issue_number: issueNumber
             });
 
@@ -127,8 +127,8 @@ jobs:
 
             if (!commentExists) {
               await github.rest.issues.createComment({
-                owner: owner,
-                repo: repoName,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 issue_number: issueNumber,
                 body: commentBody
               });
