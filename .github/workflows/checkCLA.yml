@@ -120,11 +120,11 @@ jobs:
               repo: context.repo.repo,
               issue_number: issueNumber
             });
-            //
-            // const commentExists = comments.some(comment =>
-            //   comment.body.includes("Contributor License Agreement (CLA)") &&
-            //   comment.user.login === 'github-actions[bot]'
-            // );
+            
+            const commentExists = comments.some(comment =>
+              comment.body.includes("Contributor License Agreement (CLA)") &&
+              comment.user.login === 'github-actions[bot]'
+            );
             //
             // if (!commentExists) {
               await github.rest.issues.createComment({
