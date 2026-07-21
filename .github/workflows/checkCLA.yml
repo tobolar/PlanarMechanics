@@ -108,16 +108,11 @@ jobs:
         with:
           script: |
             const issueNumber = context.payload.pull_request.number;
-            // const userLogin = context.payload.pull_request.user.login;
-            // github.event.pull_request.user.login
+            const userLogin = context.payload.pull_request.user.login;
             // const repoName = context.repo.repo;
             // const owner = context.repo.owner;
 
-            // Check if labelName already set in PR
-            // const labelName = "CLA::not signed";  // This label must exist in the github's repo
-            // const labelExists = labesOnPR.data.some(label => label.name === labelName);
-
-            const commentBody = `Thank you for your contribution to this repository!`
+            const commentBody = `@${userLogin} Thank you for your contribution to this repository!`
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
