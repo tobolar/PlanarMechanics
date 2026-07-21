@@ -10,7 +10,7 @@
 name: "Check DLR's individual CLA"
 on:
   pull_request:
-    types: [opened, edited]  #, synchronize]
+    types: [opened, edited, synchronize]
 
 jobs:
   contributor-signed-cla:
@@ -18,14 +18,16 @@ jobs:
     outputs:
       add_label: ${{ steps.check_cla_signed.outputs.add_label }}
     permissions:
-      pull-requests: write
+        issues: write  # To comment on PR in Step "Comment on PR if CLA not signed""
+        pull-requests: write
+        # contents: read  # To access files
     steps:
       - name: Check if user signed CLA
         id: check_cla_signed
         run: |
           # User/contributor of PR
           USER_LOGIN="${{ github.event.pull_request.user.login }}"
-          
+
           # List of users which signed CLA
           CLA_SIGNED_LIST="${{ secrets.CLA_SIGNED }}"
           IFS=',' read -ra CONTRIBUTORS <<< "$CLA_SIGNED_LIST"  # Convert list to an array
@@ -61,14 +63,14 @@ jobs:
             const add_label = `${{ steps.check_cla_signed.outputs.add_label }}` === 'true';
 
             // Fetch current labels on the PR
-            const labesOnPR = await github.rest.issues.listLabelsOnIssue({
+            const labelsOnPR = await github.rest.issues.listLabelsOnIssue({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber
             });
 
             // Check if labelName already set in PR
-            const labelExists = labesOnPR.data.some(label => label.name === labelName);
+            const labelExists = labelsOnPR.data.some(label => label.name === labelName);
 
             if (add_label) {
               // Add label if it doesn't exist
@@ -97,4 +99,52 @@ jobs:
                 // No action if label doesn't exist
                 console.log(`Everything is fine - nothing to do`);
               }
+            }
+
+      - name: Comment on PR if CLA not signed
+        if: always()  # Always do this step, independent of the return of the previous step
+        # if: steps.check_cla_signed.outputs.add_label == 'true'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const issueNumber = context.payload.pull_request.number;
+            const userLogin = context.payload.pull_request.user.login;
+            const repoName = context.repo.repo;
+            const owner = context.repo.owner;
+
+            const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
+              
+              Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
+              
+              **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
+              
+              Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
+              
+              Thank you for your understanding and cooperation.
+              
+              Best regards,
+              The ${repoName} team`;
+
+            // Check if comment already exists
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: owner,
+              repo: repoName,
+              issue_number: issueNumber
+            });
+
+            const commentExists = comments.some(comment =>
+              comment.body.includes("Contributor License Agreement (CLA)") &&
+              comment.user.login === 'github-actions[bot]'
+            );
+
+            if (!commentExists) {
+              await github.rest.issues.createComment({
+                issue_number: issueNumber,
+                owner: owner,
+                repo: repoName,
+                body: commentBody
+              });
+              console.log(`Comment added to PR #${issueNumber}`);
+            } else {
+              console.log(`Comment already exists in PR #${issueNumber}`);
             }
