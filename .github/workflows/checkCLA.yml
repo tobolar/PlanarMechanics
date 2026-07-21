@@ -102,6 +102,7 @@ jobs:
             }
 
       - name: Debug output
+        if: always()  # Always do this step, independent of the return of the previous step
         run: |
           echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
 
