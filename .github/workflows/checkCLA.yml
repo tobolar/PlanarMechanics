@@ -102,8 +102,7 @@ jobs:
             }
 
       - name: Comment on PR if CLA not signed
-        if: always()  # Always do this step, independent of the return of the previous step
-        # if: steps.check_cla_signed.outputs.add_label == 'true'
+        if: steps.check_cla_signed.outputs.add_label == 'true'
         uses: actions/github-script@v9
         with:
           script: |
