@@ -102,8 +102,7 @@ jobs:
             }
 
       - name: Comment on PR if CLA not signed
-        # if: steps.check_cla_signed.outputs.add_label == 'true'
-        if: always()  # Always do this step, independent of the return of the previous step
+        if: steps.check_cla_signed.outputs.add_label == 'true'
         uses: actions/github-script@v9
         with:
           script: |
@@ -116,11 +115,11 @@ jobs:
 
             // Check if comment already exists
             const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
+              owner: owner,
               repo: repoName,
               issue_number: issueNumber
             });
-            
+
             const commentExists = comments.some(comment =>
               comment.body.includes("Contributor License Agreement (CLA)") &&
               comment.user.login === 'github-actions[bot]'
@@ -128,7 +127,7 @@ jobs:
 
             if (!commentExists) {
               await github.rest.issues.createComment({
-                owner: context.repo.owner,
+                owner: owner,
                 repo: repoName,
                 issue_number: issueNumber,
                 body: commentBody
