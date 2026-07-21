@@ -52,9 +52,7 @@ jobs:
             echo ""
             echo "List of contributors who signed CLA: ${CONTRIBUTORS[*]}"
 
-            # Hit error in the last step of this job
-            echo "failed=true" >> $GITHUB_OUTPUT
-            # exit 1
+            exit 1
           fi
 
       - name: Add CLA label to PR or remove existing
@@ -110,55 +108,52 @@ jobs:
           echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
 
       - name: Comment on PR if CLA not signed
-        if: steps.check_cla_signed.outputs.add_label == 'true'
+        if: always()  # Always do this step, independent of the return of the previous step
         uses: actions/github-script@v9
         with:
           script: |
-            const issueNumber = context.payload.pull_request.number;
-            const userLogin = context.payload.pull_request.user.login;
-            const repoName = context.repo.repo;
-            const owner = context.repo.owner;
+            const add_label = `${{ steps.check_cla_signed.outputs.add_label }}` === 'true';
 
-            const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
+            if (add_label) {
+              const issueNumber = context.payload.pull_request.number;
+              const userLogin = context.payload.pull_request.user.login;
+              const repoName = context.repo.repo;
+              const owner = context.repo.owner;
 
-              Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
+              const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
 
-              **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
+                Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
 
-              Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
+                **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
 
-              Thank you for your understanding and cooperation.
+                Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
 
-              Best regards,
-              The ${repoName} team`;
+                Thank you for your understanding and cooperation.
 
-            // Check if comment already exists
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: owner,
-              repo: repoName,
-              issue_number: issueNumber
-            });
+                Best regards,
+                The ${repoName} team`;
 
-            const commentExists = comments.some(comment =>
-              comment.body.includes("Contributor License Agreement (CLA)") &&
-              comment.user.login === 'github-actions[bot]'
-            );
-
-            if (!commentExists) {
-              await github.rest.issues.createComment({
-                issue_number: issueNumber,
+              // Check if comment already exists
+              const { data: comments } = await github.rest.issues.listComments({
                 owner: owner,
                 repo: repoName,
-                body: commentBody
+                issue_number: issueNumber
               });
-              console.log(`Comment added to PR #${issueNumber}`);
-            } else {
-              console.log(`Comment already exists in PR #${issueNumber}`);
+
+              const commentExists = comments.some(comment =>
+                comment.body.includes("Contributor License Agreement (CLA)") &&
+                comment.user.login === 'github-actions[bot]'
+              );
+
+              if (!commentExists) {
+                await github.rest.issues.createComment({
+                  issue_number: issueNumber,
+                  owner: owner,
+                  repo: repoName,
+                  body: commentBody
+                });
+                console.log(`Comment added to PR #${issueNumber}`);
+              } else {
+                console.log(`Comment already exists in PR #${issueNumber}`);
+              }
             }
-
-
-      - name: Final check if error in workflow's job
-        if: steps.check_cla_signed.outputs.failed == 'true'
-        run: |
-          echo "Some jobs failed - see above."
-          exit 1
