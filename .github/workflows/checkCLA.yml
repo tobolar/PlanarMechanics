@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       add_label: ${{ steps.check_cla_signed.outputs.add_label }}
+      # failed: ${{ steps.check_cla_signed.outputs.failed }}
     permissions:
         issues: write  # To comment on PR in Step "Comment on PR if CLA not signed""
         pull-requests: write
@@ -51,7 +52,10 @@ jobs:
             echo "Please read CONTRIBUTING.md, sign the CLA and proceed as described."
             echo ""
             echo "List of contributors who signed CLA: ${CONTRIBUTORS[*]}"
-            exit 1
+
+            # Hit error in the last step of this job
+            echo "failed=true" >> $GITHUB_OUTPUT
+            # exit 1
           fi
 
       - name: Add CLA label to PR or remove existing
@@ -117,15 +121,15 @@ jobs:
             const owner = context.repo.owner;
 
             const commentBody = `@${userLogin} Thank you for your first contribution to this repository!
-              
+
               Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
-              
+
               **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
-              
+
               Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
-              
+
               Thank you for your understanding and cooperation.
-              
+
               Best regards,
               The ${repoName} team`;
 
@@ -152,3 +156,10 @@ jobs:
             } else {
               console.log(`Comment already exists in PR #${issueNumber}`);
             }
+
+
+      - name: Final check if error in workflow's job
+        if: steps.check_cla_signed.outputs.failed == 'true'
+        run: |
+          echo "Some jobs failed - see above."
+          exit 1
