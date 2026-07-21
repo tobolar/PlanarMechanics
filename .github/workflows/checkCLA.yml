@@ -63,14 +63,14 @@ jobs:
             const add_label = `${{ steps.check_cla_signed.outputs.add_label }}` === 'true';
 
             // Fetch current labels on the PR
-            const labesOnPR = await github.rest.issues.listLabelsOnIssue({
+            const labelsOnPR = await github.rest.issues.listLabelsOnIssue({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber
             });
 
             // Check if labelName already set in PR
-            const labelExists = labesOnPR.data.some(label => label.name === labelName);
+            const labelExists = labelsOnPR.data.some(label => label.name === labelName);
 
             if (add_label) {
               // Add label if it doesn't exist
@@ -114,8 +114,8 @@ jobs:
             // const owner = context.repo.owner;
 
             // Check if labelName already set in PR
-            const labelName = "CLA::not signed";  // This label must exist in the github's repo
-            const labelExists = labesOnPR.data.some(label => label.name === labelName);
+            // const labelName = "CLA::not signed";  // This label must exist in the github's repo
+            // const labelExists = labesOnPR.data.some(label => label.name === labelName);
 
             const commentBody = `Thank you for your contribution to this repository!`
             await github.rest.issues.createComment({
@@ -124,6 +124,7 @@ jobs:
               issue_number: issueNumber,
               body: commentBody
             });
+            console.log(`Comment added to PR #${issueNumber}`);
 #             const commentBody = `@${userLogin} Thank you for your contribution to this repository!
 #
 # Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
