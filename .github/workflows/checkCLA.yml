@@ -99,50 +99,50 @@ jobs:
               }
             }
 
-      - name: Comment on PR if CLA not signed
-        if: steps.check_cla_signed.outputs.add_label == 'true'
-        uses: actions/github-script@v9
-        with:
-          script: |
-            const issueNumber = context.payload.pull_request.number;
-            const userLogin = context.payload.pull_request.user.login;
-            github.event.pull_request.user.login
-            const repoName = context.repo.repo;
-            const owner = context.repo.owner;
-
-            const commentBody = `@${userLogin} Thank you for your contribution to this repository!
-
-Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
-
-**Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
-
-Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
-
-Thank you for your understanding and cooperation.
-
-Best regards,
-The ${repoName} team`;
-
-            // // Check if comment already exists
-            // const { data: comments } = await github.rest.issues.listComments({
-            //   owner: context.repo.owner,
-            //   repo: context.repo.repo,
-            //   issue_number: issueNumber
-            // });
-            // 
-            // const commentExists = comments.some(comment =>
-            //   comment.body.includes("Contributor License Agreement (CLA)") &&
-            //   comment.user.login === 'github-actions[bot]'
-            // );
-            // 
-            // if (!commentExists) {
-            //   await github.rest.issues.createComment({
-            //     issue_number: issueNumber,
-            //     owner: context.repo.owner,
-            //     repo: context.repo.repo,
-            //     body: commentBody
-            //   });
-            //   console.log(`Comment added to PR #${issueNumber}`);
-            // } else {
-            //   console.log(`Comment already exists in PR #${issueNumber}`);
-            // }
+#       - name: Comment on PR if CLA not signed
+#         if: steps.check_cla_signed.outputs.add_label == 'true'
+#         uses: actions/github-script@v9
+#         with:
+#           script: |
+#             const issueNumber = context.payload.pull_request.number;
+#             const userLogin = context.payload.pull_request.user.login;
+#             github.event.pull_request.user.login
+#             const repoName = context.repo.repo;
+#             const owner = context.repo.owner;
+# 
+#             const commentBody = `@${userLogin} Thank you for your contribution to this repository!
+# 
+# Before we can review and merge your pull request, we need you to sign **DLR's individual Contributor License Agreement (CLA)**. This is a one-time requirement for all contributors.
+# 
+# **Please follow [CONTRIBUTING.md](https://github.com/${owner}/${repoName}/blob/main/CONTRIBUTING.md) for detailed instructions.**
+# 
+# Your pull request will remain open and can be updated once the CLA is signed. If you have any questions about the CLA process, feel free to ask!
+# 
+# Thank you for your understanding and cooperation.
+# 
+# Best regards,
+# The ${repoName} team`;
+# 
+#             // // Check if comment already exists
+#             // const { data: comments } = await github.rest.issues.listComments({
+#             //   owner: context.repo.owner,
+#             //   repo: context.repo.repo,
+#             //   issue_number: issueNumber
+#             // });
+#             // 
+#             // const commentExists = comments.some(comment =>
+#             //   comment.body.includes("Contributor License Agreement (CLA)") &&
+#             //   comment.user.login === 'github-actions[bot]'
+#             // );
+#             // 
+#             // if (!commentExists) {
+#              await github.rest.issues.createComment({
+#                issue_number: issueNumber,
+#                owner: context.repo.owner,
+#                repo: context.repo.repo,
+#                body: commentBody
+#              });
+#             //   console.log(`Comment added to PR #${issueNumber}`);
+#             // } else {
+#             //   console.log(`Comment already exists in PR #${issueNumber}`);
+#             // }
