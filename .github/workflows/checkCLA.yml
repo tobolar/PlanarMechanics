@@ -110,6 +110,10 @@ jobs:
             const repoName = context.repo.repo;
             const owner = context.repo.owner;
 
+            // Check if labelName already set in PR
+            const labelName = "CLA::not signed";  // This label must exist in the github's repo
+            const labelExists = labesOnPR.data.some(label => label.name === labelName);
+
             const commentBody = `Thank you for your contribution to this repository!`
 #             const commentBody = `@${userLogin} Thank you for your contribution to this repository!
 #
