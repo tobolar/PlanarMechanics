@@ -24,6 +24,7 @@ jobs:
     steps:
       - name: Check if user signed CLA
         id: check_cla_signed
+        continue-on-error: true  # Do the following steps of this job anyway
         run: |
           # User/contributor of PR
           USER_LOGIN="${{ github.event.pull_request.user.login }}"
@@ -102,7 +103,6 @@ jobs:
             }
 
       - name: Debug output
-        if: always()  # Always do this step, independent of the return of the previous step
         run: |
           echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
 
