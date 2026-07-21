@@ -101,6 +101,10 @@ jobs:
               }
             }
 
+      - name: Debug output
+        run: |
+          echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
+
       - name: Comment on PR if CLA not signed
         if: steps.check_cla_signed.outputs.add_label == 'true'
         uses: actions/github-script@v9
