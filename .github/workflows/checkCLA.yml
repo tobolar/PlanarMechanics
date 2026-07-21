@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       add_label: ${{ steps.check_cla_signed.outputs.add_label }}
-      # failed: ${{ steps.check_cla_signed.outputs.failed }}
     permissions:
         issues: write  # To comment on PR in Step "Comment on PR if CLA not signed""
         pull-requests: write
@@ -103,9 +102,9 @@ jobs:
               }
             }
 
-      - name: Debug output
-        run: |
-          echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
+      # - name: Debug output
+      #   run: |
+      #     echo "add_label value: ${{ steps.check_cla_signed.outputs.add_label }}"
 
       - name: Comment on PR if CLA not signed
         if: always()  # Always do this step, independent of the return of the previous step
