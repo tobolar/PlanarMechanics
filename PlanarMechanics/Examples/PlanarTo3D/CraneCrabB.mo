@@ -44,11 +44,11 @@ model CraneCrabB "A planar damped crane crab in the 3D world - case B"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-50})));
-  Interfaces.PlanarTo3D adaptor3D1 annotation (Placement(transformation(
+  Interfaces.PlanarToMultiBody adaptor3D1 annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={0,0})));
-  Interfaces.PlanarTo3D adaptor3D2 annotation (Placement(transformation(
+  Interfaces.PlanarToMultiBody adaptor3D2 annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={60,0})));

@@ -1,12 +1,11 @@
 within PlanarMechanics.Interfaces;
-model PlanarTo3D "This model enables to connect planar models to the 3-dimensional world"
+model PlanarToMultiBody "This model enables to connect planar models to the 3-dimensional world"
 
   parameter SI.Length zPosition = planarWorld.defaultZPosition
     "Position z of cylinder representing the fixed translation";
   parameter Boolean rootMBS = false
     "= true, if frameMultiBody shall be Connections.root explicitly"
     annotation (Evaluate=true, Dialog(tab="Advanced"));
-
 
   outer PlanarWorldIn3D planarWorld "Planar world model";
   Frame_b framePlanar "Frame connector in PlanarMechanics"
@@ -27,13 +26,10 @@ initial equation
   if not Connections.isRoot(frameMultiBody.R) then
     angles = MB.Frames.axesRotationsAngles(frameMultiBody.R, {1,2,3}, 0);
   // else
-  //   Modelica.Utilities.Streams.print("PlanarTo3D adaptor: MBS frame is rooted");
+  //   Modelica.Utilities.Streams.print("PlanarToMultiBody adaptor: MBS frame is rooted");
   end if;
 
 equation
-  // The following assert is not needed since rooting of the connection is treated here
-  //assert(cardinality(frameMultiBody) > 0,
-  //  "Connector frameMultiBody of " + getInstanceName() + " is not connected");
   assert(cardinality(framePlanar) > 0,
     "Connector framePlanar of " + getInstanceName() + " is not connected");
 
@@ -143,4 +139,4 @@ See also <a href=\"modelica://PlanarMechanics.UsersGuide.Tutorial.Connecting3D\"
 information and how to use <code>rootMBS</code> parameter properly.
 </p>
 </html>"));
-end PlanarTo3D;
+end PlanarToMultiBody;

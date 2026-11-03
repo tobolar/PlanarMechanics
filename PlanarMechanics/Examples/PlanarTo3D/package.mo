@@ -8,7 +8,7 @@ package PlanarTo3D "Collection of examples showing how to connect the 2D and 3D 
       info="<html>
 <p>
 This package is a collection of simulatable examples which show how to use the connector
-<a href=\"modelica://PlanarMechanics.Interfaces.PlanarTo3D\">PlanarTo3D</a>
+<a href=\"modelica://PlanarMechanics.Interfaces.PlanarToMultiBody\">PlanarToMultiBody</a>
 to connect the two-dimensional (2D) world with three-dimensional (3D) world.
 </p>
 </html>",

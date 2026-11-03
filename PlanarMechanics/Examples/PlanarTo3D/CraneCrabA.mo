@@ -45,7 +45,7 @@ model CraneCrabA "A planar damped crane crab in the 3D world - case A"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-50})));
-  Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{4,14},{16,26}})));
+  Interfaces.PlanarToMultiBody adaptor3D annotation (Placement(transformation(extent={{4,14},{16,26}})));
   inner PlanarWorldIn3D planarWorld(
     inheritGravityFromMultiBody=true,
     constantGravity={0,0},

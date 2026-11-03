@@ -25,7 +25,7 @@ model DoublePendulum2Dto3D "Double pendulum devided between the 2D and the 3D wo
   Parts.FixedTranslation translation(r={1,0}) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
   MB.Parts.FixedTranslation translation1(r={0.4,0,0}) annotation (Placement(transformation(extent={{50,-20},{70,0}})));
   Modelica.Mechanics.Rotational.Components.Damper damper(d=0.01) annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
-  Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{40,-16},{28,-4}})));
+  Interfaces.PlanarToMultiBody adaptor3D annotation (Placement(transformation(extent={{40,-16},{28,-4}})));
   Parts.Fixed fix annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,

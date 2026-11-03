@@ -70,8 +70,8 @@ model PendulumLongRoot "Demonstrate the influence of rooting of the 3D/2D adapte
   MB.Parts.FixedTranslation translationOutMBS(r={0.4,0,0}) annotation (Placement(transformation(extent={{50,40},{70,60}})));
   MB.Parts.FixedTranslation translationOut3Din2Droot(r=translationOutMBS.r) annotation (Placement(transformation(extent={{50,-20},{70,0}})));
   MB.Parts.FixedTranslation translationOut3Din2D(r=translationOutMBS.r) annotation (Placement(transformation(extent={{50,-80},{70,-60}})));
-  Interfaces.PlanarTo3D adaptor3Din2Droot(rootMBS=true) annotation (Placement(transformation(extent={{-28,-16},{-40,-4}})));
-  Interfaces.PlanarTo3D adaptor3Din2D(rootMBS=false) annotation (Placement(transformation(extent={{-28,-76},{-40,-64}})));
+  Interfaces.PlanarToMultiBody adaptor3Din2Droot(rootMBS=true) annotation (Placement(transformation(extent={{-28,-16},{-40,-4}})));
+  Interfaces.PlanarToMultiBody adaptor3Din2D(rootMBS=false) annotation (Placement(transformation(extent={{-28,-76},{-40,-64}})));
   inner MB.World world annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   inner PlanarWorldIn3D planarWorld(
     inheritGravityFromMultiBody=true,

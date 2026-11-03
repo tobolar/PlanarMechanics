@@ -2,7 +2,7 @@ within PlanarMechanics.Examples.PlanarTo3D;
 model Pendulum "Compare rigid pendulum in the 3D and the 2D world"
   extends Modelica.Icons.Example;
 
-  Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{-8,-46},{-20,-34}})));
+  Interfaces.PlanarToMultiBody adaptor3D annotation (Placement(transformation(extent={{-8,-46},{-20,-34}})));
   MB.Sensors.AbsoluteAngles sensorAnglesMBS(sequence={3,2,1}, guessAngle1=0) annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   MB.Sensors.AbsoluteAngles sensorAngles3Din2D(sequence={3,2,1}, guessAngle1=0) annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
   MB.Parts.Body bodyMBS(
