@@ -1,32 +1,10 @@
 within PlanarMechanics.Examples.PlanarTo3D;
-model DoublePendulum2Dto3D "Simple double pendulum with two revolute joints and two bodies in the 3D world"
+model DoublePendulum2Dto3D "Double pendulum devided between the 2D and the 3D world"
   extends Modelica.Icons.Example;
 
-  Parts.Body body(
-    m=1,
-    I=0.33)
-    annotation (Placement(transformation(extent={{0,10},{20,30}})));
-  Parts.FixedTranslation fixedTranslation(r={1,0})
-    annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
-  Parts.Fixed fixed annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
-        origin={-90,20})));
-  MB.Parts.Body body1(
-    r_CM=zeros(3),
-    m=0.2,
-    I_33=0.01)
-    annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  MB.Parts.FixedTranslation fixedTranslation1(r={0.4,0,0})
-    annotation (Placement(transformation(extent={{50,-20},{70,0}})));
-  inner PlanarWorldIn3D planarWorld(
-    inheritGravityFromMultiBody=true,
-    enableAnimation=true,
-    animateWorld=true,
-    animateGravity=true,
-    connectToMultiBody=true)
-    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-  Joints.Revolute revolute(phi(fixed=true, start=0), w(fixed=true, start=0),
+  Joints.Revolute revolute(
+    phi(fixed=true, start=0),
+    w(fixed=true, start=0),
     stateSelect=StateSelect.always)
     annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
   Joints.Revolute revolute1(
@@ -35,27 +13,49 @@ model DoublePendulum2Dto3D "Simple double pendulum with two revolute joints and 
     w(fixed=true, start=0),
     stateSelect=StateSelect.always)
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  inner MB.World world annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+  Parts.Body body(
+    m=1,
+    I=0.33)
+    annotation (Placement(transformation(extent={{0,10},{20,30}})));
+  MB.Parts.Body body1(
+    r_CM=zeros(3),
+    m=0.2,
+    I_33=0.01)
+    annotation (Placement(transformation(extent={{80,-20},{100,0}})));
+  Parts.FixedTranslation translation(r={1,0}) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
+  MB.Parts.FixedTranslation translation1(r={0.4,0,0}) annotation (Placement(transformation(extent={{50,-20},{70,0}})));
+  Modelica.Mechanics.Rotational.Components.Damper damper(d=0.01) annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
   Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{40,-16},{28,-4}})));
-  Modelica.Mechanics.Rotational.Components.Damper damper(d=0.1) annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
+  Parts.Fixed fix annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={-90,20})));
+  inner MB.World world annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+  inner PlanarWorldIn3D planarWorld(
+    inheritGravityFromMultiBody=true,
+    enableAnimation=true,
+    animateWorld=true,
+    animateGravity=true,
+    connectToMultiBody=true)
+    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
 equation
-  connect(fixedTranslation.frame_b, body.frame_a) annotation (Line(
+  connect(translation.frame_b, body.frame_a) annotation (Line(
       points={{-20,20},{0,20}},
       color={95,95,95},
       thickness=0.5));
-  connect(fixedTranslation1.frame_b, body1.frame_a) annotation (Line(
+  connect(translation1.frame_b, body1.frame_a) annotation (Line(
       points={{70,-10},{80,-10}},
       color={95,95,95},
       thickness=0.5));
-  connect(revolute.frame_b, fixedTranslation.frame_a) annotation (Line(
+  connect(revolute.frame_b, translation.frame_a) annotation (Line(
       points={{-50,20},{-40,20}},
       color={95,95,95},
       thickness=0.5));
-  connect(fixedTranslation.frame_b, revolute1.frame_a) annotation (Line(
+  connect(translation.frame_b, revolute1.frame_a) annotation (Line(
       points={{-20,20},{-10,20},{-10,-10},{0,-10}},
       color={95,95,95},
       thickness=0.5));
-  connect(fixed.frame, revolute.frame_a) annotation (Line(
+  connect(fix.frame, revolute.frame_a) annotation (Line(
       points={{-80,20},{-70,20}},
       color={95,95,95},
       thickness=0.5));
@@ -67,7 +67,7 @@ equation
       points={{20,-10},{28,-10}},
       color={95,95,95},
       thickness=0.5));
-  connect(fixedTranslation1.frame_a, adaptor3D.frameMultiBody) annotation (Line(
+  connect(translation1.frame_a, adaptor3D.frameMultiBody) annotation (Line(
       points={{50,-10},{40,-10}},
       color={95,95,95},
       thickness=0.5));
@@ -80,15 +80,34 @@ equation
       revisions="<html>
 <p>
 <img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
-<b>Developed 2026 at the DLR Institute of System Dynamics and Control</b>
+<b>Developed 2026 at the DLR Institute of Vehicle Concepts</b>
 </p>
 </html>",
       info="<html>
-<p>Beware this is a chaotic system. However, the chaotic part should start after 10s.</p>
-<blockquote>
-<img src=\"modelica://PlanarMechanics/Resources/Images/Examples/PlanarTo3D/DoublePendulum_1.png\" alt=\"Diagram DoublePendulum_1\">
-</blockquote>
-</html>"),
+<p>
+A&nbsp;simple double pendulum with two revolute joints and two bodies. One of the bodies is modeled in
+the 3D world, the remaninig is in the 2D world.
+</p>
+<dev>
+<img src=\"modelica://PlanarMechanics/Resources/Images/Examples/PlanarTo3D/DoublePendulum2Dto3D_1.png\" alt=\"Rotation of joints of double pendulum\">
+</dev>
+</html>",
+      figures = {
+        Figure(
+          identifier = "pendulum-motion",
+          preferred = true,
+          plots = {
+            Plot(
+              identifier = "pendulum_phi",
+              curves = {
+                Curve(y = revolute.phi),
+                Curve(y = revolute1.phi)}),
+            Plot(
+              identifier = "pendulum_w",
+              curves = {
+                Curve(y = revolute.w),
+                Curve(y = revolute1.w)})},
+          caption = "%(plot:pendulum-motion) Motion of the pendulum")}),
     Diagram(
       graphics={
         Rectangle(

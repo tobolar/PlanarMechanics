@@ -45,6 +45,7 @@ model CraneCrabA "A planar damped crane crab in the 3D world - case A"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-50})));
+  Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{4,14},{16,26}})));
   inner PlanarWorldIn3D planarWorld(
     inheritGravityFromMultiBody=true,
     constantGravity={0,0},
@@ -54,7 +55,6 @@ model CraneCrabA "A planar damped crane crab in the 3D world - case A"
     annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
   inner MB.World world(n={0,-1,0})
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
-  Interfaces.PlanarTo3D adaptor3D annotation (Placement(transformation(extent={{4,14},{16,26}})));
 equation
   connect(fixedTranslation.frame_b,body3. frame_a) annotation (Line(
       points={{60,-60},{60,-72}},
@@ -103,7 +103,7 @@ equation
       revisions="<html>
 <p>
 <img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
-<b>Developed 2018 at the DLR Institute of System Dynamics and Control</b>
+<b>Developed 2026 at the DLR Institute of Vehicle Concepts</b>
 </p>
 </html>",
       info="<html>
@@ -139,7 +139,24 @@ Especially, the states of joints are to be compared, see below.
 <blockquote>
 <img src=\"modelica://PlanarMechanics/Resources/Images/Examples/PlanarTo3D/CraneCrabA_1.png\"  alt=\"Diagram CraneCrabA_1\">
 </blockquote>
-</html>"),
+</html>",
+      figures = {
+        Figure(
+          identifier = "crab-motion",
+          preferred = true,
+          plots = {
+            Plot(
+              identifier = "crab-position",
+              curves = {
+                Curve(y = prismatic1.s),
+                Curve(y = prismatic2.s)}),
+            Plot(
+              identifier = "load-angle",
+              y = Axis(unit = "rad"),
+              curves = {
+                Curve(y = revolute.phi),
+                Curve(y = revolute.w)})},
+          caption = "%(plot:crab-motion) Motion of the crab")}),
     Diagram(graphics={
         Rectangle(
           extent={{10,36},{98,-94}},

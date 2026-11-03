@@ -90,7 +90,7 @@ equation
       revisions="<html>
 <p>
 <img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
-<b>Developed 2026 at the DLR Institute of System Dynamics and Control</b>
+<b>Developed 2026 at the DLR Institute of Vehicle Concepts</b>
 </p>
 </html>",
       info="<html>
@@ -105,17 +105,22 @@ The simulation results of this example can be compared with those of examples
 <a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D.CraneCrabA\">CraneCrabA</a>,
 <a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D.CraneCrabB\">CraneCrabB</a>,
 </p>
-<!--Especially, the states of joints are to be compared, see below.
-</p>
-
-<h4>The comparison of planar and 3-dimensional model simulation</h4>
-<p>
-The following information can be gained from Dymola.
-</p>
-
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\">
-<tr><td><b>TRANSLATION</b>                              </td><td><b>CraneCrabTo3Da</b></td><td><b>CraneCrabMBS</b> </td></tr>
-</table>
--->
-</html>"));
+</html>",
+      figures = {
+        Figure(
+          identifier = "crab-motion",
+          preferred = true,
+          plots = {
+            Plot(
+              identifier = "crab-position",
+              curves = {
+                Curve(y = prismatic1.s),
+                Curve(y = prismatic2.s)}),
+            Plot(
+              identifier = "load-angle",
+              y = Axis(unit = "rad"),
+              curves = {
+                Curve(y = revolute.phi),
+                Curve(y = revolute.w)})},
+          caption = "%(plot:crab-motion) Motion of the crab")}));
 end CraneCrabMBS;

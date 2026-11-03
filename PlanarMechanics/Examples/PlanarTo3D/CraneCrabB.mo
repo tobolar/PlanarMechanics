@@ -2,14 +2,14 @@ within PlanarMechanics.Examples.PlanarTo3D;
 model CraneCrabB "A planar damped crane crab in the 3D world - case B"
   extends Modelica.Icons.Example;
 
-  MB.Parts.Body body2(r_CM=zeros(3), m=1) annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={80,20})));
   Parts.Body body1(m=1, I=0.001) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=-90,
         origin={0,-20})));
+  MB.Parts.Body body2(r_CM=zeros(3), m=1) annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={80,20})));
   Parts.Body body3(I=0.1, m=0.5) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -44,6 +44,14 @@ model CraneCrabB "A planar damped crane crab in the 3D world - case B"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-50})));
+  Interfaces.PlanarTo3D adaptor3D1 annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={0,0})));
+  Interfaces.PlanarTo3D adaptor3D2 annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=90,
+        origin={60,0})));
   inner PlanarWorldIn3D planarWorld(
     inheritGravityFromMultiBody=true,
     constantGravity={0,0},
@@ -53,14 +61,6 @@ model CraneCrabB "A planar damped crane crab in the 3D world - case B"
     annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
   inner MB.World world(n={0,-1,0})
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
-  Interfaces.PlanarTo3D adaptor3D1 annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=-90,
-        origin={0,0})));
-  Interfaces.PlanarTo3D adaptor3D2 annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=90,
-        origin={60,0})));
 equation
   connect(fixedTranslation.frame_b,body3. frame_a) annotation (Line(
       points={{60,-60},{60,-72}},
@@ -113,7 +113,7 @@ equation
       revisions="<html>
 <p>
 <img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
-<b>Developed 2026 at the DLR Institute of System Dynamics and Control</b>
+<b>Developed 2026 at the DLR Institute of Vehicle Concepts</b>
 </p>
 </html>",
       info="<html>
@@ -142,7 +142,6 @@ Here, the planar damped crane crab is modelled of both planar and multibody part
 <p>
 The simulation results of this example can be compared with those of examples
 <a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D.CraneCrabA\">CraneCrabA</a>,
-<a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D.CraneCrabB\">CraneCrabB</a>,
 <a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D.CraneCrabMBS\">CraneCrabMBS</a>,
 The last one is modelled purely in 3D and can thus be seen as a reference for the comparison.
 Especially, the states of joints are to be compared, see below.
@@ -150,7 +149,24 @@ Especially, the states of joints are to be compared, see below.
 <blockquote>
 <img src=\"modelica://PlanarMechanics/Resources/Images/Examples/PlanarTo3D/CraneCrabB_1.png\"  alt=\"Diagram CraneCrabB_1\">
 </blockquote>
-</html>"),
+</html>",
+      figures = {
+        Figure(
+          identifier = "crab-motion",
+          preferred = true,
+          plots = {
+            Plot(
+              identifier = "crab-position",
+              curves = {
+                Curve(y = prismatic1.s),
+                Curve(y = prismatic2.s)}),
+            Plot(
+              identifier = "load-angle",
+              y = Axis(unit = "rad"),
+              curves = {
+                Curve(y = revolute.phi),
+                Curve(y = revolute.w)})},
+          caption = "%(plot:crab-motion) Motion of the crab")}),
     Diagram(graphics={
         Rectangle(
           extent={{42,0},{98,-94}},

@@ -15,7 +15,7 @@ to connect the two-dimensional (2D) world with three-dimensional (3D) world.
       revisions="<html>
 <p>
 <img src=\"modelica://PlanarMechanics/Resources/Images/dlr_logo.png\" alt=\"DLR logo\">
-<b>Developed 2018 at the DLR Institute of System Dynamics and Control</b>
+<b>Developed 2026 at the DLR Institute of Vehicle Concepts</b>
 </p>
 </html>"));
 end PlanarTo3D;
