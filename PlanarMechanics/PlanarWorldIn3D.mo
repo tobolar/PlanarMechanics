@@ -277,7 +277,7 @@ going along with this acceleration are thus neglected.
 </p>
 <p>
 For physical coupling between 2D and 3D system use 
-<a href=\"modelica://PlanarMechanics.Interfaces.PlanarTo3D\">Interfaces.PlanarTo3D</a>
+<a href=\"modelica://PlanarMechanics.Interfaces.PlanarToMultiBody\">Interfaces.PlanarToMultiBody</a>
 </p>
 <p>
 The gravity vector can be inherited from the 
