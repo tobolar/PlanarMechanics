@@ -130,7 +130,7 @@ This component enables the connection between planar and
 </p>
 <p>
 The orientation and position of the 2D system within the 3D system are determined by the multibody
-connector of the <a href=\"modelica://PlanarMechanics.PlanarWorldIn3D\">planar world model</a> or zero
+connector of the <a href=\"modelica://PlanarMechanics.PlanarWorldIn3D\">planar world model</a>, or zero
 rotation at zero position otherwise.
 </p>
 <p>
