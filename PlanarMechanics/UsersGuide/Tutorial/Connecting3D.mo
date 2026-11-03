@@ -13,7 +13,7 @@ class Connecting3D "Connecting planar models to the 3-dimensional world"
 <p>
 It is possible to connect the planar (2D) and the three-dimensional (3D) worlds in a&nbsp;limited
 manner. The connection is particularly enabled by the adaptor
-<a href=\"modelica://PlanarMechanics.Interfaces.PlanarTo3D\">PlanarTo3D</a> and
+<a href=\"modelica://PlanarMechanics.Interfaces.PlanarToMultiBody\">PlanarToMultiBody</a> and
 settings in the <a href=\"modelica://PlanarMechanics.PlanarWorldIn3D\">PlanarWorldIn3D</a>.
 There are several <a href=\"modelica://PlanarMechanics.Examples.PlanarTo3D\">examples</a>
 available that demonstrate how to use the adaptor in this context.
@@ -32,7 +32,7 @@ available that demonstrate how to use the adaptor in this context.
     If such forces are required, they must be implemented directly in the 3D world in another way.
   </li>
   <li>
-    The <code>PlanarTo3D</code> adaptor is essential for integrating planar and 3D systems,
+    The <code>PlanarToMultiBody</code> adaptor is essential for integrating planar and 3D systems,
     enabling the use of the simpler planar mechanics library while still benefiting from
     3D visualization and analysis.
   </li>
@@ -48,13 +48,13 @@ Alternatively, the planar world may act as the leading mechanism, driving the 3D
 </p>
 <p>
 For both cases, the planar-to-multibody adaptor
-<a href=\"modelica://PlanarMechanics.Interfaces.PlanarTo3D\">PlanarTo3D</a>
+<a href=\"modelica://PlanarMechanics.Interfaces.PlanarToMultiBody\">PlanarToMultiBody</a>
 can be used to connect the two worlds. In the first case &ndash; considered the typical usage
 &ndash; the adaptor works without trouble.
 </p>
 <p>
 In the second case, where the 2D system is leading, a&nbsp;<em>root</em> of the 3D kinematic tree
-must be established within the PlanarTo3D adaptor. For more details on connections and rooting,
+must be established within the PlanarToMultiBody adaptor. For more details on connections and rooting,
 refer e.g. to
 <a href=\"https://specification.modelica.org/maint/3.7/connectors-and-connections.html#connection-graphs-and-their-operators\">Modelica Specification</a>.
 Depending on the modeled system, a&nbsp;Modelica tool may automatically handle this, as the
@@ -64,7 +64,7 @@ However, the chances are high that this automatic procedure will fail and the si
 system will generate false results.
 </p>
 <p>
-To properly resolve this situation, the <code>rootMBS</code> parameter of the PlanarTo3D adaptor 
+To properly resolve this situation, the <code>rootMBS</code> parameter of the PlanarToMultiBody adaptor 
 should be explicitly set to <em>true</em>. This forces the <code>frameMultiBody</code> connector 
 to be treated as a&nbsp;root in the subsequent multibody kinematic tree.
 The example 
