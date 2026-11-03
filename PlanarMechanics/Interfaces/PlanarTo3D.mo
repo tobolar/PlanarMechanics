@@ -134,12 +134,12 @@ connector of the <a href=\"modelica://PlanarMechanics.PlanarWorldIn3D\">planar w
 rotation at zero position otherwise.
 </p>
 <p>
-The parameter <code>rootMBS</code> enables to force <code>frameMultiBody</code> being a&nbsp;<em>root</em> 
-in the subsequent 3D system. This is mostly required when the planar world is a&nbsp;&quot;leading&quot;
-mechanism and multibody parts are connected to it.
+The parameter <code>rootMBS</code> allows to force <code>frameMultiBody</code> to be a&nbsp;<em>root</em>
+frame in the subsequent 3D system. This is particularly necessary when the planar world is
+a&nbsp;&quot;leading&quot; mechanism and multibody parts are connected to it.
 </p>
 <p>
-See also <a href=\"modelica://PlanarMechanics.UsersGuide.Tutorial.Connecting3D\">Tutorial</a> for more
+See also <a href=\"modelica://PlanarMechanics.UsersGuide.Tutorial.Connecting3D\">Tutorial</a> for further
 information and how to use <code>rootMBS</code> parameter properly.
 </p>
 </html>"));
